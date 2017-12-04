@@ -73,7 +73,9 @@ app.use('*', function (req, res) {
 });
 
 //Main
-const port = app.get('port') || 3000;
-app.listen(port, () => console.log(`Server on port ${port}`));
+app.listen(config.env.webPort, function () {
+    console.log('De server luistert op port ' + app.get('port'));
+    console.log('Zie bijvoorbeeld http://localhost:3000/api/v1/users');
+});
 
 module.exports = app;
