@@ -6,7 +6,8 @@ const session = driver.session();
 
 module.exports = {
     index: async (req, res, next) => {
-        const users = await User.find({});
+        const users = await User.find({})
+            .sort([['created_at', 'descending']]);
 
         res.status(200).json(users);
     },
@@ -32,10 +33,12 @@ module.exports = {
         res.status(200).json(user)
     },
     getThreads: async (req, res, next) => {
-        const user = await User.findById(req.params.id).populate({
-            path: 'threads',
-            ref: 'thread'
-        });
+        const user = await User.findById(req.params.id)
+            .sort([['created_at', 'descending']])
+            .populate({
+                path: 'threads',
+                ref: 'thread'
+            });
 
         res.status(200).json(user.threads)
     },

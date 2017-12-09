@@ -5,7 +5,9 @@ const session = driver.session();
 
 module.exports = {
     index: async (req, res, next) => {
-        const comments = await Comment.find({}).populate({
+        const comments = await Comment.find({})
+            .sort([['content', 'descending']])
+            .populate({
             path: 'user',
             select: 'email'
         });

@@ -6,10 +6,12 @@ const session = driver.session();
 
 module.exports = {
     index: async (req, res, next) => {
-        const threads = await Thread.find({}).populate({
-            path: 'user',
-            select: 'email'
-        });
+        const threads = await Thread.find({})
+            .sort([['created_at', 'descending']])
+            .populate({
+                path: 'user',
+                select: 'email'
+            });
 
         res.status(200).json(threads);
     },
@@ -30,6 +32,7 @@ module.exports = {
     },
     getComments: async (req, res, next) => {
         const thread = await Thread.findById(req.params.id)
+            .sort([['created_at', 'descending']])
             .populate({
             path: 'comments',
                 populate: {
