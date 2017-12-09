@@ -29,14 +29,15 @@ module.exports = {
         res.status(200).json(thread)
     },
     getComments: async (req, res, next) => {
-        const thread = await Thread.findById(req.params.id).populate({
+        const thread = await Thread.findById(req.params.id)
+            .populate({
             path: 'comments',
-            ref: 'comment'
-        },
-        {
-            path: 'user',
-            select: 'email'
-        });
+                populate: {
+                    path: 'user',
+                    model: 'user',
+                    select: 'email'
+                }
+            });
 
         res.status(200).json(thread.comments)
     },
