@@ -22,7 +22,10 @@ module.exports = {
         res.status(200).json({ success: true })
     },
     getById: async (req, res, next) => {
-        const comment = await Comment.findById(req.params.id);
+        const comment = await Comment.findById(req.params.id).populate({
+            path: 'user',
+            select: 'email'
+        });
 
         res.status(200).json(comment)
     }
