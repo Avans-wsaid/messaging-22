@@ -32,6 +32,10 @@ module.exports = {
         const thread = await Thread.findById(req.params.id).populate({
             path: 'comments',
             ref: 'comment'
+        },
+        {
+            path: 'user',
+            select: 'email'
         });
 
         res.status(200).json(thread.comments)
