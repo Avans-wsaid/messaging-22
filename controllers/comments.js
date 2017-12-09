@@ -5,7 +5,10 @@ const session = driver.session();
 
 module.exports = {
     index: async (req, res, next) => {
-        const comments = await Comment.find({});
+        const comments = await Comment.find({}).populate({
+            path: 'user',
+            select: 'email'
+        });
         res.status(200).json(comments);
     },
     edit: async (req, res, next) => {

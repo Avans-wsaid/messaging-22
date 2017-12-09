@@ -6,7 +6,10 @@ const session = driver.session();
 
 module.exports = {
     index: async (req, res, next) => {
-        const threads = await Thread.find({});
+        const threads = await Thread.find({}).populate({
+            path: 'user',
+            select: 'email'
+        });
 
         res.status(200).json(threads);
     },

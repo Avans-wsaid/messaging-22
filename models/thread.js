@@ -10,7 +10,8 @@ const ThreadSchema = new Schema({
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'comment'
-    }]
+    }],
+    user: {type: Schema.Types.ObjectId, ref: 'user' }
 });
 
 const Thread = mongoose.model('thread', ThreadSchema);
