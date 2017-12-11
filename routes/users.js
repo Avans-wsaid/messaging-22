@@ -6,6 +6,9 @@ router.route('/')
     .get(usersController.index)
     .post(usersController.create);
 
+router.route('/search')
+    .get(usersController.getByName);
+
 router.route('/:id')
     .get(usersController.getById)
     .put(usersController.edit)

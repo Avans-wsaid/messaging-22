@@ -32,6 +32,11 @@ module.exports = {
 
         res.status(200).json(user)
     },
+    getByName: async (req, res, next) => {
+        const user = await User.findOne({ email: req.query.email });
+
+        res.status(200).json(user)
+    },
     getThreads: async (req, res, next) => {
         const user = await User.findById(req.params.id)
             .sort([['created_at', 'descending']])
