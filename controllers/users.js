@@ -33,7 +33,7 @@ module.exports = {
         res.status(200).json(user)
     },
     getByName: async (req, res, next) => {
-        const user = await User.findOne({ email: req.query.email });
+        const user = await User.find({'firstName' : new RegExp(req.query.name, 'i')});
 
         res.status(200).json(user)
     },
